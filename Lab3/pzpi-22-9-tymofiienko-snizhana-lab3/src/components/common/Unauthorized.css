@@ -1,0 +1,38 @@
+.unauthorized-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f2f8e5;
+  }
+  
+  .unauthorized-card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    width: 400px;
+    max-width: 90%;
+    text-align: center;
+  }
+  
+  .unauthorized-card p {
+    margin: 1rem 0 2rem;
+    color: #555;
+  }
+  
+  .back-button {
+    padding: 0.75rem 1.5rem;
+    background-color: #99c24d;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .back-button:hover {
+    background-color: #76a32e;
+  }

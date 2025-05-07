@@ -1,0 +1,158 @@
+.users-management {
+    padding: 2rem;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.page-header h2 {
+    margin: 0;
+    color: #2d6a4f;
+}
+
+.add-button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.add-button:hover {
+    background-color: #45a049;
+}
+
+.users-search {
+    margin-bottom: 1.5rem;
+}
+
+.search-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.users-table-container {
+    overflow-x: auto;
+}
+
+.users-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.users-table th, 
+.users-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #f0f0f0;
+  color: #333; 
+}
+
+.users-table tr:hover {
+    background-color: #f0f7f0;
+}
+
+.users-table .actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.action-button.view {
+    color: #2196f3;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.action-button.view:hover {
+    background-color: #e3f2fd;
+}
+
+  .users-table th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.page-header h2 {
+    color: #2d6a4f;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+}
+
+.action-button {
+    background: none;
+    border: none;
+    color: #2196f3;
+    cursor: pointer;
+    font-weight: 500;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.action-button:hover {
+    background-color: #e3f2fd;
+}
+  
+.action-button.view {
+    color: #2196f3;
+}
+
+.loading, .error {
+    text-align: center;
+    padding: 2rem;
+    font-size: 1.1rem;
+}
+
+.error {
+    color: #c62828;
+}
+
+.error-message {
+    background-color: #ffebee;
+    color: #c62828;
+    padding: 0.75rem 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 6px;
+}
+
+.pet-item {
+    background-color: #f5f9f0;
+    padding: 0.75rem;
+    border-radius: 6px;
+    margin-bottom: 0.75rem;
+    border: 1px solid #e0e0e0;
+}
+
+.pets-list {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.form-note {
+    background-color: #e8f5e9;
+    padding: 0.75rem;
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    color: #2d6a4f;
+}

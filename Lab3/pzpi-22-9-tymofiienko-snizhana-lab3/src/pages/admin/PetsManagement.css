@@ -1,0 +1,153 @@
+.pets-management {
+    width: 100%;
+  }
+  
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .page-header h2 {
+    color: #2d6a4f;
+    margin: 0;
+  }
+  
+  .add-button {
+    background-color: #a6d886;
+    color: #2d6a4f;
+    border: none;
+    padding: 0.7rem 1.2rem;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .add-button:hover {
+    background-color: #95c775;
+  }
+  
+  .pets-search {
+    margin-bottom: 1.5rem;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 1rem;
+  }
+  
+  .pets-table-container {
+    overflow-x: auto;
+  }
+  
+  .pets-table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .pets-table th,
+  .pets-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #f0f0f0;
+    color: #333; 
+  }
+  
+  .pets-table tr:last-child td {
+    border-bottom: none;
+  }
+  
+  .pets-table tr:hover {
+    background-color: #f0f7f0;
+  }
+  
+  .pets-table td a, 
+  .pets-table td span {
+    color: #333;
+  }
+  
+  .status {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+  
+  .status.active {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+  }
+  
+  .status.inactive {
+    background-color: #ffebee;
+    color: #c62828;
+  }
+  
+  .actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .action-button {
+    padding: 0.3rem 0.6rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .action-button.edit {
+    background-color: #e3f2fd;
+    color: #1565c0;
+  }
+  
+  .action-button.view {
+    background-color: #f5f9f0;
+    color: #2d6a4f;
+  }
+  
+  .action-button.delete {
+    background-color: #ffebee;
+    color: #c62828;
+  }
+  
+  .action-button.edit:hover {
+    background-color: #bbdefb;
+  }
+  
+  .action-button.view:hover {
+    background-color: #e8f5e9;
+  }
+  
+  .action-button.delete:hover {
+    background-color: #ffcdd2;
+  }
+  
+  .loading {
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+  }
+  
+  .error {
+    text-align: center;
+    padding: 2rem;
+    color: #c62828;
+  }
+  
+  .no-data {
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+  }

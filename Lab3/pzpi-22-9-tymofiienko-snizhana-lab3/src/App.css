@@ -1,0 +1,50 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  background-color: #f2f8e5;
+}
+
+.app {
+  min-height: 100vh;
+}
+
+.unauthorized {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 2rem;
+  text-align: center;
+}
+
+.unauthorized h1 {
+  color: #2d6a4f;
+  margin-bottom: 1rem;
+}
+
+.unauthorized p {
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.unauthorized button {
+  padding: 0.75rem 1.5rem;
+  background-color: #99c24d;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.unauthorized button:hover {
+  background-color: #76a32e;
+}

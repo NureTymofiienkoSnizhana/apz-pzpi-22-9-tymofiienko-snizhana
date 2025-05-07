@@ -1,0 +1,15 @@
+.pets-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: left;
+    margin-bottom: 1.5rem;
+}
+  
+.pets-header h2 {
+    color: #2d6a4f;
+    margin: 0;
+}
+
+.search-container {
+    margin-bottom: 1.5rem;
+}
