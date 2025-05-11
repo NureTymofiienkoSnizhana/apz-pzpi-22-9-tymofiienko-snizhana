@@ -1,0 +1,183 @@
+Міністерство освіти і науки України
+Харківський національний університет радіоелектроніки
+
+
+Кафедра програмної інженерії
+
+
+
+Звіт
+з лабораторної роботи №3
+з дисципліни «Аналіз та рефакторинг коду»
+з теми: «Web застосунок»
+
+
+
+
+
+Виконала: 								Перевірив
+ст. гр. ПЗПІ-22-9							Дашенков Д. С.
+Тимофієнко С. О.
+
+
+
+
+
+
+
+Харків 2025
+Лабораторна робота №3 – Web застосунок
+3.1. Мета: Розробити front-end частину програмної системи.
+3.2. Хід роботи:
+У ході виконання лабораторної роботи було розроблено клієнтську, а саме front-end частину програмної системи. Вона призначена для адміністраторів та ветеринарів, тому в цій частині реалізовано відповідні функції, а саме: логін, реєстрація нових користувачів для адміністратора, додавання нової тварини, редагування даних для адміністратора, перегляд тварин та свторення звітів про їх стан здоров'я.
+Для зберігання токена використано Redux, а саме localStorage, що зберігає дані токену в локальному сховищі та за потреби використовує його.
+Зв’язок із серверною частиною було реалізовано за допомогою технології axios, що дозволяє відправляти асинхронні запити.
+Для виконання цієї частини програми було обрано java-script бібліотека React. Також була використана бібліотека react-router-dom.
+Також у ході лабораторної роботи було створено Use-Case діаграми, а саме: UML діаграму прецедентів (Use Case Diagram), зображену на рис. 3.1, UML діаграму компонент (Component Diagram), зображену на рис. 3.2, UML діаграму взаємодії (Interaction Overview Diagram), зображену на рис. 3.3 та UML діаграму станів (State Diagram), зображену на рис. 3.4.
+
+Рисунок 3.1 - Use Case діаграма прецедентів для веб застосунку
+
+
+Рисунок 3.2 - UML діаграма компонентів (Component Diagram)
+
+Рисунок 3.3 - UML діаграма взаємодії (Interaction Overview Diagram)
+
+Рисунок 3.4 - UML діаграма станів (State Diagram)
+	Посилання на файл з діаграмами: https://lucid.app/lucidchart/63a85ae7-eef4-4009-b985-309a91eb07a2/edit?viewport_loc=1416%2C-26%2C3758%2C1562%2C.Q4MUjXso07N&invitationId=inv_40e2a3cb-8e8c-47a3-893b-352fa5c5da59
+	Для перевірки авторизації користувача я використовувала JWT токени:
+package middle
+
+var jwtKey = []byte(os.Getenv("JWT_SECRET"))
+
+type Claims struct {
+    UserID string `json:"user_id"`
+    Role   string `json:"role"`
+    jwt.RegisteredClaims
+}
+
+func GenerateJWT(userID primitive.ObjectID, role string) (string, error) {
+    expirationTime := time.Now().Add(24 * time.Hour)
+    claims := &Claims{
+       UserID: userID.Hex(),
+       Role:   role,
+       RegisteredClaims: jwt.RegisteredClaims{
+          ExpiresAt: jwt.NewNumericDate(expirationTime),
+          IssuedAt:  jwt.NewNumericDate(time.Now()),
+       },
+    }
+
+    token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+    tokenString, err := token.SignedString(jwtKey)
+    if err != nil {
+       return "", err
+    }
+
+    return tokenString, nil
+}
+
+func JWTAuth(next http.Handler) http.Handler {
+    return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+       authHeader := r.Header.Get("Authorization")
+       if authHeader == "" {
+          http.Error(w, "Authorization header required", http.StatusUnauthorized)
+          return
+       }
+
+       bearerToken := strings.Split(authHeader, " ")
+       if len(bearerToken) != 2 || bearerToken[0] != "Bearer" {
+          http.Error(w, "Invalid token format", http.StatusUnauthorized)
+          return
+       }
+
+       tokenStr := bearerToken[1]
+
+       if tokenstore.IsBlacklisted(tokenStr) {
+          http.Error(w, "Token has been invalidated", http.StatusUnauthorized)
+          return
+       }
+
+       claims := &Claims{}
+
+       token, err := jwt.ParseWithClaims(tokenStr, claims, func(token *jwt.Token) (interface{}, error) {
+          if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+             return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
+          }
+          return jwtKey, nil
+       })
+
+       if err != nil {
+          if err == jwt.ErrSignatureInvalid {
+             http.Error(w, "Invalid token signature", http.StatusUnauthorized)
+             return
+          }
+          http.Error(w, "Invalid token", http.StatusUnauthorized)
+          return
+       }
+
+       if !token.Valid {
+          http.Error(w, "Invalid token", http.StatusUnauthorized)
+          return
+       }
+
+       userID, err := primitive.ObjectIDFromHex(claims.UserID)
+       if err != nil {
+          http.Error(w, "Invalid user ID in token", http.StatusUnauthorized)
+          return
+       }
+
+       ctx := context.WithValue(r.Context(), "user_id", userID)
+       ctx = context.WithValue(ctx, "role", claims.Role)
+
+       next.ServeHTTP(w, r.WithContext(ctx))
+    })
+}
+
+func CheckRole(requiredRole string) func(http.Handler) http.Handler {
+    return func(next http.Handler) http.Handler {
+       return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+          role, ok := r.Context().Value("role").(string)
+          if !ok || role != requiredRole {
+             http.Error(w, "Unauthorized: insufficient permissions", http.StatusForbidden)
+             return
+          }
+          next.ServeHTTP(w, r)
+       })
+    }
+}
+
+
+import axios from 'axios';
+
+const api = axios.create({
+    baseURL: '/api',
+});
+
+api.interceptors.request.use(
+    (config) => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+    },
+    (error) => Promise.reject(error)
+);
+
+api.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        if (error.response && (error.response.status === 401 || error.response.status === 403)) {
+            localStorage.removeItem('token');
+            localStorage.removeItem('role');
+            localStorage.removeItem('userId');
+            window.location.href = '/login';
+        }
+        return Promise.reject(error);
+    }
+);
+
+export default api;
+
+
+3.3. Висновок:
+У ході виконання лабораторної роботи було створено web frontend компонент системи за допомогою JavaScript бібліотеки React. За допомогою HTTP запитів компонент пов’язано с бекендом. Було виконано усі поставлені у Vision&Scope документі вимоги.
