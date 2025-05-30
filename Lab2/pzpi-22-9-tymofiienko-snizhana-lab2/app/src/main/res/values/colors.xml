@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Existing colors - обновленные в салатово-бежевой гамме -->
+    <color name="purple_200">#FFB8E6B8</color> <!-- Светло-салатовый -->
+    <color name="purple_500">#FF8BC34A</color> <!-- Основной салатовый -->
+    <color name="purple_700">#FF689F38</color> <!-- Темно-салатовый -->
+    <color name="teal_200">#FFE8F5E8</color> <!-- Очень светлый мятный -->
+    <color name="teal_700">#FF4E7C59</color> <!-- Темно-мятный -->
+    <color name="black">#FF2E3A2E</color> <!-- Темно-зеленый вместо черного -->
+    <color name="white">#FFFAF8F5</color> <!-- Кремово-белый -->
+
+    <!-- Additional colors for enhanced profile -->
+    <color name="light_gray">#FFF0EDE8</color> <!-- Светло-бежевый -->
+    <color name="gray">#FFBCB5A8</color> <!-- Бежево-серый -->
+    <color name="dark_gray">#FF6B5B4F</color> <!-- Темно-бежевый -->
+
+    <!-- Status colors -->
+    <color name="green">#FF7CB342</color> <!-- Салатово-зеленый -->
+    <color name="red">#FFE57373</color> <!-- Мягкий красный -->
+    <color name="blue">#FF81C784</color> <!-- Мятно-голубой -->
+    <color name="orange">#FFFFA726</color> <!-- Теплый желто-оранжевый -->
+    <color name="gold">#FFFDD835</color> <!-- Лимонно-желтый -->
+
+    <!-- Background colors -->
+    <color name="background_light">#FFF7F5F0</color> <!-- Кремовый фон -->
+    <color name="card_background">#FFFEFCF8</color> <!-- Светло-кремовый для карточек -->
+    <color name="surface">#FFFAF8F5</color> <!-- Кремово-белая поверхность -->
+
+    <!-- Text colors -->
+    <color name="text_primary">#FF2E4A2E</color> <!-- Темно-зеленый текст -->
+    <color name="text_secondary">#FF5D6B5D</color> <!-- Серо-зеленый текст -->
+    <color name="text_hint">#FF9CAF9C</color> <!-- Светло-зеленый hint -->
+
+    <!-- Accent colors -->
+    <color name="accent_light">#FFD4EFDF</color> <!-- Светлый мятный акцент -->
+    <color name="accent_dark">#FF2E5233</color> <!-- Темно-зеленый акцент -->
+
+    <color name="light_red">#FFFFEAEA</color> <!-- Очень светло-розовый -->
+    <color name="light_orange">#FFFFF8E1</color> <!-- Светло-кремовый -->
+    <color name="light_green">#FFF1F8E9</color> <!-- Очень светло-салатовый -->
+</resources>
