@@ -7,7 +7,7 @@ services:
     container_name: pet-health-mongodb
     environment:
       MONGO_INITDB_ROOT_USERNAME: welnersis
-      MONGO_INITDB_ROOT_PASSWORD: B4H%2A%24Xt%40TUyRf9%24
+      MONGO_INITDB_ROOT_PASSWORD: password
       MONGO_INITDB_DATABASE: PetAndHealth
     ports:
       - "27017:27017"
@@ -24,12 +24,12 @@ services:
     environment:
       - PORT=8080
       - MONGO_USERNAME=welnersis
-      - MONGO_PASSWORD=B4H%2A%24Xt%40TUyRf9%24
-      - JWT_SECRET=4eb895be78713cdea490adda5070980c89a8a79aa3462b4f2ed5171864dc261f2fdfe48d9979490cad80574bdd8e9383cc81321d1bf4399f87cf42d0c4b41dbf
+      - MONGO_PASSWORD=password
+      - JWT_SECRET=token
       - SMTP_HOST=smtp.gmail.com
       - SMTP_PORT=587
       - SMTP_USERNAME=timofeenko1404@gmail.com
-      - SMTP_PASSWORD=skyf chzb ypfw xhvk
+      - SMTP_PASSWORD=password
       - SMTP_FROM_NAME=Pet Health System
     depends_on:
       - mongodb
@@ -44,12 +44,12 @@ services:
     environment:
       - PORT=8080
       - MONGO_USERNAME=welnersis
-      - MONGO_PASSWORD=B4H%2A%24Xt%40TUyRf9%24
-      - JWT_SECRET=4eb895be78713cdea490adda5070980c89a8a79aa3462b4f2ed5171864dc261f2fdfe48d9979490cad80574bdd8e9383cc81321d1bf4399f87cf42d0c4b41dbf
+      - MONGO_PASSWORD=password
+      - JWT_SECRET=token
       - SMTP_HOST=smtp.gmail.com
       - SMTP_PORT=587
       - SMTP_USERNAME=timofeenko1404@gmail.com
-      - SMTP_PASSWORD=skyf chzb ypfw xhvk
+      - SMTP_PASSWORD=password
       - SMTP_FROM_NAME=Pet Health System
     depends_on:
       - mongodb
@@ -67,12 +67,12 @@ services:
     environment:
       - PORT=8080
       - MONGO_USERNAME=welnersis
-      - MONGO_PASSWORD=B4H%2A%24Xt%40TUyRf9%24
-      - JWT_SECRET=4eb895be78713cdea490adda5070980c89a8a79aa3462b4f2ed5171864dc261f2fdfe48d9979490cad80574bdd8e9383cc81321d1bf4399f87cf42d0c4b41dbf
+      - MONGO_PASSWORD=password
+      - JWT_SECRET=token
       - SMTP_HOST=smtp.gmail.com
       - SMTP_PORT=587
       - SMTP_USERNAME=timofeenko1404@gmail.com
-      - SMTP_PASSWORD=skyf chzb ypfw xhvk
+      - SMTP_PASSWORD=password
       - SMTP_FROM_NAME=Pet Health System
     depends_on:
       - mongodb

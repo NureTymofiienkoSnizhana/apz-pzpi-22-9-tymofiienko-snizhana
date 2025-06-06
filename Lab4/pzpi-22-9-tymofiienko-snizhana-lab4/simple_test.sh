@@ -24,7 +24,7 @@ docker run -d \
     --name pet-mongodb \
     --network pet-health-net \
     -e MONGO_INITDB_ROOT_USERNAME=welnersis \
-    -e MONGO_INITDB_ROOT_PASSWORD='B4H*$Xt@TUyRf9$' \
+    -e MONGO_INITDB_ROOT_PASSWORD='password' \
     -e MONGO_INITDB_DATABASE=PetAndHealth \
     mongo:6.0
 
@@ -38,12 +38,12 @@ docker run -d \
     -p 8080:8080 \
     -e PORT=8080 \
     -e MONGO_USERNAME=welnersis \
-    -e MONGO_PASSWORD='B4H*$Xt@TUyRf9$' \
-    -e JWT_SECRET='4eb895be78713cdea490adda5070980c89a8a79aa3462b4f2ed5171864dc261f2fdfe48d9979490cad80574bdd8e9383cc81321d1bf4399f87cf42d0c4b41dbf' \
+    -e MONGO_PASSWORD='password' \
+    -e JWT_SECRET='token' \
     -e SMTP_HOST=smtp.gmail.com \
     -e SMTP_PORT=587 \
     -e SMTP_USERNAME=timofeenko1404@gmail.com \
-    -e SMTP_PASSWORD='skyf chzb ypfw xhvk' \
+    -e SMTP_PASSWORD='password' \
     -e SMTP_FROM_NAME='Pet Health System' \
     pet-health-backend:latest
 
