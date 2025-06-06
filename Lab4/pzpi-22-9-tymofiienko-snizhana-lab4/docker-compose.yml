@@ -1,0 +1,104 @@
+version: '3.8'
+
+services:
+  # MongoDB
+  mongodb:
+    image: mongo:6.0
+    container_name: pet-health-mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: welnersis
+      MONGO_INITDB_ROOT_PASSWORD: B4H%2A%24Xt%40TUyRf9%24
+      MONGO_INITDB_DATABASE: PetAndHealth
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - pet-health-network
+    restart: unless-stopped
+
+  # Pet Health Backend - 1 інстанс
+  pet-health-backend-1:
+    build: .
+    container_name: pet-health-backend-1
+    environment:
+      - PORT=8080
+      - MONGO_USERNAME=welnersis
+      - MONGO_PASSWORD=B4H%2A%24Xt%40TUyRf9%24
+      - JWT_SECRET=4eb895be78713cdea490adda5070980c89a8a79aa3462b4f2ed5171864dc261f2fdfe48d9979490cad80574bdd8e9383cc81321d1bf4399f87cf42d0c4b41dbf
+      - SMTP_HOST=smtp.gmail.com
+      - SMTP_PORT=587
+      - SMTP_USERNAME=timofeenko1404@gmail.com
+      - SMTP_PASSWORD=skyf chzb ypfw xhvk
+      - SMTP_FROM_NAME=Pet Health System
+    depends_on:
+      - mongodb
+    networks:
+      - pet-health-network
+    restart: unless-stopped
+
+  # Pet Health Backend - 2 інстанс (для масштабування)
+  pet-health-backend-2:
+    build: .
+    container_name: pet-health-backend-2
+    environment:
+      - PORT=8080
+      - MONGO_USERNAME=welnersis
+      - MONGO_PASSWORD=B4H%2A%24Xt%40TUyRf9%24
+      - JWT_SECRET=4eb895be78713cdea490adda5070980c89a8a79aa3462b4f2ed5171864dc261f2fdfe48d9979490cad80574bdd8e9383cc81321d1bf4399f87cf42d0c4b41dbf
+      - SMTP_HOST=smtp.gmail.com
+      - SMTP_PORT=587
+      - SMTP_USERNAME=timofeenko1404@gmail.com
+      - SMTP_PASSWORD=skyf chzb ypfw xhvk
+      - SMTP_FROM_NAME=Pet Health System
+    depends_on:
+      - mongodb
+    networks:
+      - pet-health-network
+    restart: unless-stopped
+    profiles:
+      - scale-2
+      - scale-3
+
+  # Pet Health Backend - 3 інстанс (для масштабування)
+  pet-health-backend-3:
+    build: .
+    container_name: pet-health-backend-3
+    environment:
+      - PORT=8080
+      - MONGO_USERNAME=welnersis
+      - MONGO_PASSWORD=B4H%2A%24Xt%40TUyRf9%24
+      - JWT_SECRET=4eb895be78713cdea490adda5070980c89a8a79aa3462b4f2ed5171864dc261f2fdfe48d9979490cad80574bdd8e9383cc81321d1bf4399f87cf42d0c4b41dbf
+      - SMTP_HOST=smtp.gmail.com
+      - SMTP_PORT=587
+      - SMTP_USERNAME=timofeenko1404@gmail.com
+      - SMTP_PASSWORD=skyf chzb ypfw xhvk
+      - SMTP_FROM_NAME=Pet Health System
+    depends_on:
+      - mongodb
+    networks:
+      - pet-health-network
+    restart: unless-stopped
+    profiles:
+      - scale-3
+
+  # Nginx Load Balancer
+  nginx:
+    image: nginx:alpine
+    container_name: pet-health-loadbalancer
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - pet-health-backend-1
+    networks:
+      - pet-health-network
+    restart: unless-stopped
+
+volumes:
+  mongodb_data:
+
+networks:
+  pet-health-network:
+    driver: bridge
